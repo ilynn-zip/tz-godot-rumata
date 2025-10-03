@@ -1,0 +1,147 @@
+[gd_scene load_steps=6 format=3 uid="uid://nhw7suy7dxcj"]
+
+[ext_resource type="Script" uid="uid://bsgheskgnxwc1" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="FontFile" uid="uid://cikwdq75g63c0" path="res://assets/fonts/BoldPixels.ttf" id="2_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://cyyrm15r1x8cn" path="res://scenes/mainscene.tscn" id="2_wu84c"]
+[ext_resource type="FontFile" uid="uid://bd8be5k80e5x4" path="res://assets/fonts/Ithaca.ttf" id="3_wu84c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
+font = ExtResource("2_bqqt6")
+font_size = 64
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxnf")
+game_scene = ExtResource("2_wu84c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.5
+offset_top = -116.0
+offset_right = 273.5
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Dungeon Cleaner"
+label_settings = SubResource("LabelSettings_ekxnf")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_wu84c")
+theme_override_font_sizes/font_size = 32
+text = "Продолжить"
+flat = true
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_wu84c")
+theme_override_font_sizes/font_size = 32
+text = "Начать новую игру"
+flat = true
+
+[node name="HowButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_wu84c")
+theme_override_font_sizes/font_size = 32
+text = "Как играть"
+flat = true
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_wu84c")
+theme_override_font_sizes/font_size = 32
+text = "Выход"
+flat = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer2"]
+layout_mode = 2
+color = Color(0.09803922, 0.078431375, 0.16862746, 0.98039216)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_wu84c")
+theme_override_font_sizes/normal_font_size = 32
+text = "Привет!
+В этой игре ты маленький робот пылесос!
+Собери все пылевые монетки.
+И постарйся не здавить ни одну шныряющую тут и там мышку.
+Удачи!
+
+Управление:
+W - вперёд						S - назад
+A - поворот влево			D - порот вправо
+SPACE - рывок
+ESC - вызов меню паузы"
+fit_content = true
+
+[node name="BackButton" type="Button" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_wu84c")
+theme_override_font_sizes/font_size = 32
+text = "Назад"
+flat = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HowButton" to="." method="_on_how_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

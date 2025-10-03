@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjj8iqud1qiia"]
+
+[ext_resource type="Script" uid="uid://dhuu1oc3lhp42" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://iu8b6gsn4gvv" path="res://assets/sprites/player.png" id="2_g2els"]
+[ext_resource type="PackedScene" uid="uid://cawraihx5xc0o" path="res://scenes/gui.tscn" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://bn58mf4t38gbj" path="res://assets/audio/vc_start.wav" id="4_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://bgagdjuj0ej6d" path="res://assets/audio/vc_mid.wav" id="5_fjrip"]
+[ext_resource type="AudioStream" uid="uid://bf5axaqvhsdyy" path="res://assets/audio/vc_stop.wav" id="6_smehm"]
+[ext_resource type="AudioStream" uid="uid://1fn7ceb5sysd" path="res://assets/audio/death-1.wav" id="7_fjrip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vyb7"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 7.0
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_fjrip"]
+clip_count = 3
+clip_0/name = &"Vc Start"
+clip_0/stream = ExtResource("4_tuyoq")
+clip_0/auto_advance = 0
+clip_1/name = &"Vc Mid"
+clip_1/stream = ExtResource("5_fjrip")
+clip_1/auto_advance = 0
+clip_2/name = &"Vc Stop"
+clip_2/stream = ExtResource("6_smehm")
+clip_2/auto_advance = 0
+_transitions = {
+Vector2i(0, 1): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, 2): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+}
+}
+
+[node name="Player" type="CharacterBody2D" groups=["pausable"]]
+collision_mask = 2
+script = ExtResource("1_3vyb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3vyb7")
+
+[node name="DashTimers" type="Node2D" parent="."]
+
+[node name="DashTime" type="Timer" parent="DashTimers"]
+one_shot = true
+
+[node name="CDTime" type="Timer" parent="DashTimers"]
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_g2els")
+debug_color = Color(0.9945012, 0, 0.22841299, 0.41960785)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_top = 0
+limit_smoothed = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("3_qhqgy")]
+
+[node name="MoveAudio" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamInteractive_fjrip")
+volume_db = -10.0
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("7_fjrip")
+volume_db = 3.0
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[connection signal="timeout" from="DashTimers/DashTime" to="." method="_on_dash_time_timeout"]
+[connection signal="timeout" from="DashTimers/CDTime" to="." method="_on_cd_time_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

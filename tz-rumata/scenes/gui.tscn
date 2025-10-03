@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cawraihx5xc0o"]
+
+[ext_resource type="Texture2D" uid="uid://bn61sliy1dfn" path="res://assets/sprites/coin.png" id="1_mfius"]
+[ext_resource type="Script" uid="uid://dsgqqk11xxr0p" path="res://scripts/gui.gd" id="1_ynd5l"]
+[ext_resource type="LabelSettings" uid="uid://douknjr36k76e" path="res://assets/fonts/gui_label.tres" id="2_ynd5l"]
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ynd5l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_right = 52.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_mfius")
+expand_mode = 2
+
+[node name="Current" type="Label" parent="MarginContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_ynd5l")
+
+[node name="Divider" type="Label" parent="MarginContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "/"
+label_settings = ExtResource("2_ynd5l")
+
+[node name="Total" type="Label" parent="MarginContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("2_ynd5l")

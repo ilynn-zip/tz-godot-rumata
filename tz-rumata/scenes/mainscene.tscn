@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyyrm15r1x8cn"]
+
+[ext_resource type="PackedScene" uid="uid://clwnie1ncf0x0" path="res://scenes/level.tscn" id="1_hm37i"]
+[ext_resource type="Script" uid="uid://ok88aplubjo7" path="res://scripts/mainscene.gd" id="1_nx3wj"]
+[ext_resource type="PackedScene" uid="uid://cjj8iqud1qiia" path="res://scenes/player.tscn" id="2_golqe"]
+[ext_resource type="PackedScene" uid="uid://32qcjv2k7lh7" path="res://scenes/pause_menu.tscn" id="4_4c2fu"]
+
+[node name="Mainscene" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_nx3wj")
+
+[node name="Level" parent="." instance=ExtResource("1_hm37i")]
+process_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("2_golqe")]
+process_mode = 1
+position = Vector2(124, 226)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("4_4c2fu")]
+size_flags_horizontal = 3
+size_flags_vertical = 3

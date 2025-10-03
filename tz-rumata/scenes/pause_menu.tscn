@@ -1,0 +1,107 @@
+[gd_scene load_steps=5 format=3 uid="uid://32qcjv2k7lh7"]
+
+[ext_resource type="Script" uid="uid://4jguun8t4srs" path="res://scripts/pause_menu.gd" id="1_myx47"]
+[ext_resource type="FontFile" uid="uid://cikwdq75g63c0" path="res://assets/fonts/BoldPixels.ttf" id="2_kukqi"]
+[ext_resource type="FontFile" uid="uid://bd8be5k80e5x4" path="res://assets/fonts/Ithaca.ttf" id="3_5d2l8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_myx47"]
+font = ExtResource("2_kukqi")
+font_size = 64
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_myx47")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09803922, 0.078431375, 0.16862746, 0.7058824)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -273.5
+offset_top = -116.0
+offset_right = 273.5
+offset_bottom = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Пауза"
+label_settings = SubResource("LabelSettings_myx47")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 32
+text = "Продолжить"
+flat = true
+
+[node name="AgainButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 32
+text = "Начать заново"
+flat = true
+
+[node name="MainMenuButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 32
+text = "Вернуться в Меню"
+flat = true
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_5d2l8")
+theme_override_font_sizes/font_size = 32
+text = "Выйти на рабочий стол"
+flat = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/AgainButton" to="." method="_on_again_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
